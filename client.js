@@ -42,17 +42,25 @@ const employees = [
 
 console.log( employees );
 
-function bonusInformation(employees){
+function bonusInformation(array = employees){
   console.log("Running bonusCalculator");
   for (let employee of employees){
-    let employeeBonus = {
+    let employeeBonusInfo = {
       name: employee.name,
       bonusPercentage: bonusCalculator(employee) * 100, 
       totalCompensation: (bonusCalculator(employee) + 1) * employee.annualSalary,
+      totalBonus: Math.round((bonusCalculator(employee) * employee.annualSalary))
     }
+    console.log(
+      `Name: ${employeeBonusInfo.name}
+      Bonus Percentage: ${employeeBonusInfo.bonusPercentage}%
+      Total Compensation: $${employeeBonusInfo.totalCompensation}
+      Total Bonus: $${employeeBonusInfo.totalBonus}`)
   }
 }
-console.log();
+
+bonusInformation();
+
 
 function bonusCalculator(employee) {
   let reviewBonus = 0;
@@ -81,7 +89,4 @@ function bonusCalculator(employee) {
   return reviewPercent;
 } //end bonusCalculator
 
-function totalCompensationCalculator(employee){
-  bonusCalculator(employee) // returns string '9%'
-}
 console.log('testing Bonus Calculator should be .09', bonusCalculator(employees[0]));
