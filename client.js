@@ -42,12 +42,13 @@ const employees = [
 
 console.log( employees );
 
+let bonusInfo = [];
 function bonusInformation(array = employees){
   console.log("Running bonusCalculator");
   // loop through employee array
   for (let employee of employees){
     // declare new object
-    let employeeBonusInfo = {
+    const employeeBonusInfo = {
       name: employee.name,
       //this equation turns it to a percentage
       bonusPercentage: bonusCalculator(employee) * 100, 
@@ -55,13 +56,16 @@ function bonusInformation(array = employees){
       totalCompensation: (bonusCalculator(employee) + 1) * employee.annualSalary,
       totalBonus: Math.round((bonusCalculator(employee) * employee.annualSalary))
     }
+    // add to bonusInfo array
+    bonusInfo.push(employeeBonusInfo);
     // log to console each value of new object
     console.log(
       `Name: ${employeeBonusInfo.name}
       Bonus Percentage: ${employeeBonusInfo.bonusPercentage}%
       Total Compensation: $${employeeBonusInfo.totalCompensation}
-      Total Bonus: $${employeeBonusInfo.totalBonus}`)
+      Total Bonus: $${employeeBonusInfo.totalBonus}`);
   }
+  displayEmployees();
 }
 
 //run function
@@ -112,4 +116,19 @@ $(document).ready(readyNow);
 
 function readyNow(){
   $('#addEmployeeButton').on('click', bonusInformation)
+}
+
+function displayEmployees(){
+  console.log('in displayEmployees');
+  //target our output by ID
+  let el=$('#employeesOut');
+  //empty
+  el.empty();
+  //append to list
+  for (let info of bonusInfo){
+    el.append(`<li>` + `Name: ` + info.name + 
+              `<br />Bonus Percentage: ` + info.bonusPercentage + 
+              `<br />Total Compensation: ` + info.totalCompensation + 
+              `<br />Total Bonus: ` + info.totalBonus + `<br /><br /></li>`);
+  }
 }
