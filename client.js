@@ -44,13 +44,18 @@ console.log( employees );
 
 function bonusInformation(array = employees){
   console.log("Running bonusCalculator");
+  // loop through employee array
   for (let employee of employees){
+    // declare new object
     let employeeBonusInfo = {
       name: employee.name,
+      //this equation turns it to a percentage
       bonusPercentage: bonusCalculator(employee) * 100, 
+      //this equation adds the bonus to the original salary
       totalCompensation: (bonusCalculator(employee) + 1) * employee.annualSalary,
       totalBonus: Math.round((bonusCalculator(employee) * employee.annualSalary))
     }
+    // log to console each value of new object
     console.log(
       `Name: ${employeeBonusInfo.name}
       Bonus Percentage: ${employeeBonusInfo.bonusPercentage}%
@@ -59,13 +64,18 @@ function bonusInformation(array = employees){
   }
 }
 
+//run function
 bonusInformation();
 
 
 function bonusCalculator(employee) {
   let reviewBonus = 0;
+  // create switch function to evaluate review rating
   switch (employee.reviewRating){
-    case 2: reviewBonus = employee.annualSalary;
+    // any rating 2 or below should return 0 as no bonus can be given.
+    case 1: reviewBonus = 0;
+      break;
+    case 2: reviewBonus = 0;
       break;
     case 3: reviewBonus = employee.annualSalary*0.04;
       break;
@@ -74,12 +84,15 @@ function bonusCalculator(employee) {
     case 5: reviewBonus = employee.annualSalary*0.10;
       break;
   } //end switch
+  //determine if employee number is 4 digits
   if (employee.employeeNumber.toString().length === 4){
     reviewBonus += employee.annualSalary*0.05;
   } //end if
+  //determine if annual salary is greater than 65,000
   if (employee.annualSalary > 65000){
     reviewBonus -= reviewBonus*0.01;
   } //end if
+  //make sure bonus does not exceed 13 percent or fall below 0 percent
   if (reviewBonus > (employee.annualSalary*0.13)){
     reviewBonus = (employee.annualSalary*0.13);
   }else if (reviewBonus < 0){
@@ -89,4 +102,8 @@ function bonusCalculator(employee) {
   return reviewPercent;
 } //end bonusCalculator
 
-console.log('testing Bonus Calculator should be .09', bonusCalculator(employees[0]));
+console.log('testing Bonus Calculator on employees[0] should be 0.09:', bonusCalculator(employees[0]));
+console.log('testing Bonus Calculator on employees[1]should be 0.06:', bonusCalculator(employees[1]));
+console.log('testing Bonus Calculator on employees[2] should be 0.13:', bonusCalculator(employees[2]));
+console.log('testing Bonus Calculator on employees[3] should be 0:', bonusCalculator(employees[3]));
+console.log('testing Bonus Calculator on employees[4] should be 0:', bonusCalculator(employees[4]));
