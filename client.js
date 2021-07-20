@@ -65,7 +65,7 @@ function bonusInformation(array = employees){
 }
 
 //run function
-bonusInformation();
+// bonusInformation();
 
 
 function bonusCalculator(employee) {
@@ -107,3 +107,9 @@ console.log('testing Bonus Calculator on employees[1]should be 0.06:', bonusCalc
 console.log('testing Bonus Calculator on employees[2] should be 0.13:', bonusCalculator(employees[2]));
 console.log('testing Bonus Calculator on employees[3] should be 0:', bonusCalculator(employees[3]));
 console.log('testing Bonus Calculator on employees[4] should be 0:', bonusCalculator(employees[4]));
+
+$(document).ready(readyNow);
+
+function readyNow(){
+  $('#addEmployeeButton').on('click', bonusInformation)
+}
