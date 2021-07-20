@@ -127,8 +127,8 @@ function displayEmployees(){
   //append to list
   for (let info of bonusInfo){
     el.append(`<li>` + `Name: ` + info.name + 
-              `<br />Bonus Percentage: ` + info.bonusPercentage + 
-              `<br />Total Compensation: ` + info.totalCompensation + 
-              `<br />Total Bonus: ` + info.totalBonus + `<br /><br /></li>`);
+              `<br />Bonus Percentage: ` + info.bonusPercentage + `%` +
+              `<br />Total Compensation: $` + info.totalCompensation + 
+              `<br />Total Bonus: $` + info.totalBonus + `<br /><br /></li>`);
   }
 }
